@@ -8,6 +8,7 @@ gem 'rails', '4.0.0.rc1'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '2.13.1'
+  gem 'hpricot'
 end
 
 group :test do
