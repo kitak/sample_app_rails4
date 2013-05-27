@@ -2,8 +2,6 @@ require File.expand_path('../../spec_helper', __FILE__)
 
 describe "StaticPages" do
 
-  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
-
   subject { page }
   describe "Home page" do
     before { visit root_path }
