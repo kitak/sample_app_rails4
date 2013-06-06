@@ -34,17 +34,20 @@ describe "UserPages" do
 
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
+        let(:another_admin) { FactoryGirl.create(:user, :admin => true) }
 
         before do
           sign_in admin
+          another_admin # ページを表示する前にanother_adminを生成
           visit users_path
         end
 
-        it { should have_link('delete', href: user_path(User.first)) }
+        it { should have_selector("a[href='#{user_path(User.first)}']", text: "delete") }
         it "should be able to delete another user" do
-          expect { click_link('delete') }.to change(User, :count).by(-1)
+          expect { find('ul.users li:first-child').click_link('delete') }.to change(User, :count).by(-1)
         end
-        it { should_not have_link('delete', href: user_path(admin)) }
+        it { should_not have_selector("a[href='#{user_path(admin)}']", text: "delete") }
+        it { should_not have_selector("a[href='#{user_path(another_admin)}']", text: "delete") }
       end
     end
 
