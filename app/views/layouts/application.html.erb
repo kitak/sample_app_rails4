@@ -15,7 +15,10 @@
     <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <%= debug(params) if Rails.env.development? %>
+    <%if Rails.env.development? %>
+      <%= debug(params) %>
+      <%= content_tag(:pre, request.inspect, class: "debug_dump") %>
+    <% end %>
   </div>
 </body>
 </html>
