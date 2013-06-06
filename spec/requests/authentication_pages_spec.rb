@@ -27,6 +27,12 @@ describe "Authentication" do
       it { should have_link('Settings', href: edit_user_path(user))}
       it { should have_link(sign_out_text, href: signout_path)}
       it { should_not have_link(sign_in_text, href: signin_path)}
+
+      describe "don't display `sign up` button" do
+        before { click_link "Home" }
+        specify { expect(page).not_to have_link("Sign up now!", href: signup_path)}
+      end
+
       describe "followed by signout" do
         before { click_link sign_out_text }
         it { should have_link(sign_in_text) }
