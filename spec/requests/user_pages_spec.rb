@@ -33,12 +33,11 @@ describe "UserPages" do
       it { should_not have_link('delete') }
 
       describe "as an admin user" do
-        let(:admin) { FactoryGirl.create(:admin) }
-        let(:another_admin) { FactoryGirl.create(:user, :admin => true) }
+        let!(:admin) { FactoryGirl.create(:admin) }
+        let!(:another_admin) { FactoryGirl.create(:user, :admin => true) }
 
         before do
           sign_in admin
-          another_admin # ページを表示する前にanother_adminを生成
           visit users_path
         end
 
