@@ -148,7 +148,7 @@ describe "Authentication" do
 
       before { sign_in non_admin }
 
-      describe "submitting a DELETE request to the Users#destory action" do
+      describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
         specify { expect(response).to redirect_to(root_path) }
       end
