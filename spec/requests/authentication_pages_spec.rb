@@ -27,6 +27,12 @@ describe "Authentication" do
       it { should have_link('Settings', href: edit_user_path(user))}
       it { should have_link(sign_out_text, href: signout_path)}
       it { should_not have_link(sign_in_text, href: signin_path)}
+
+      describe "don't display `sign up` button" do
+        before { click_link "Home" }
+        specify { expect(page).not_to have_link("Sign up now!", href: signup_path)}
+      end
+
       describe "followed by signout" do
         before { click_link sign_out_text }
         it { should have_link(sign_in_text) }
@@ -38,6 +44,10 @@ describe "Authentication" do
 
       it { should have_title(sign_in_text) }
       it { should have_error_message('Invalid')}
+      it { should_not have_link('Profile') }
+      it { should_not have_link('Settings')}
+      it { should_not have_link(sign_out_text, href: signout_path)}
+      it { should have_link(sign_in_text, href: signin_path)}
 
       describe 'after visiting another page' do
         before { click_link "Home" }
@@ -47,6 +57,24 @@ describe "Authentication" do
   end
 
   describe "authorization" do
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+
+      describe "in the Users controller" do
+        describe "visiting the new page" do
+          before { visit new_user_path }
+          it { should have_content('This is the home page') }
+        end
+
+        describe "submitting to the create action" do
+          before { post users_path(user) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+      end
+      
+    end
+
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 
@@ -61,6 +89,20 @@ describe "Authentication" do
         describe "after signing in" do
           it "should render the desired protected page" do
             expect(page).to have_title("Edit user")
+          end
+
+          describe "when signing in again" do
+            before do
+              delete signout_path
+              visit signin_path
+              fill_in "Email", with: user.email
+              fill_in "Password", with: user.password
+              click_button "Sign in"
+            end
+
+            it "should render the default (profile) page" do
+              expect(page).to have_title(user.name)
+            end
           end
         end
       end
