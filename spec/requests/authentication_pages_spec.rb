@@ -27,6 +27,12 @@ describe "Authentication" do
       it { should have_link('Settings', href: edit_user_path(user))}
       it { should have_link(sign_out_text, href: signout_path)}
       it { should_not have_link(sign_in_text, href: signin_path)}
+
+      describe "don't display `sign up` button" do
+        before { click_link "Home" }
+        specify { expect(page).not_to have_link("Sign up now!", href: signup_path)}
+      end
+
       describe "followed by signout" do
         before { click_link sign_out_text }
         it { should have_link(sign_in_text) }
@@ -51,6 +57,24 @@ describe "Authentication" do
   end
 
   describe "authorization" do
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+
+      describe "in the Users controller" do
+        describe "visiting the new page" do
+          before { visit new_user_path }
+          it { should have_content('This is the home page') }
+        end
+
+        describe "submitting to the create action" do
+          before { post users_path(user) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+      end
+      
+    end
+
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 
