@@ -60,8 +60,6 @@ describe "UserPages" do
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
     before { 31.times { FactoryGirl.create(:micropost, user: user) }}
-    after { user.microposts.each(&:destroy) }
-
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
