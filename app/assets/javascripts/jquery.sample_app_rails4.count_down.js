@@ -2,10 +2,9 @@
 
   $.fn.countDown = function(option) {
     option.max_length = option.max_length || 140;
-    $(option.target).text(option.max_length);
 
-    var setQuantity = function() {
-      var $textarea = $(this);
+    var setQuantity = function(textarea) {
+      var $textarea = $(textarea);
       var $target = $(option.target);
       var quantity = option.max_length - $textarea.val().length;
       $target.text(quantity);
@@ -17,7 +16,8 @@
       }
     };
 
-    this.on('keyup change', setQuantity);
+    this.on('keyup change', function() { setQuantity(this); });
+    setQuantity(this);
 
     return this;
   };
