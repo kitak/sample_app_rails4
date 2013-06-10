@@ -25,7 +25,7 @@ describe "StaticPages" do
         before do 
           FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
           FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
-          @m = FactoryGirl.create(:micropost, user: another_user, content: "Open sesame!")
+          @micropost = FactoryGirl.create(:micropost, user: another_user, content: "Open sesame!")
           sign_in user
           visit root_path
         end
@@ -36,7 +36,7 @@ describe "StaticPages" do
           end
         end
         
-        it { should_not have_link("delete", href: micropost_path(@m)) }
+        it { should_not have_link("delete", href: micropost_path(@micropost)) }
       end
 
       describe "the sidebar micropost counts" do
