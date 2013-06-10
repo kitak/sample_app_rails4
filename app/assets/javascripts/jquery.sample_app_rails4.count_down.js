@@ -15,8 +15,10 @@
 
   $.fn.countDown = function(target, max_length) {
     max_length = max_length || DEFAULT_MAX_LENGTH;
-    var handler = setQuantity.bind($(this), $(target), max_length);
-    $(this).on('keyup change', handler);
+    var handler = setQuantity.bind(this, $(target), max_length);
+    this.on('keyup change', handler);
     handler();
+
+    return this;
   };
 })(jQuery);
