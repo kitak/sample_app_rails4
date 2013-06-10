@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
   var $textarea = $("#micropost_content");
   var $count_down = $("#count_down");
   var MAX_LENGTH = 140;
