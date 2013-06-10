@@ -71,7 +71,7 @@ describe "UserPages" do
 
       it { should have_selector('div.pagination') }
 
-      it "should list each user" do
+      it "should list each micropost" do
         user.microposts.paginate(page: 1).each do |micropost|
           expect(page).to have_selector('li', text: micropost.content)
         end
