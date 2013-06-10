@@ -17,5 +17,7 @@
 //= require_tree .
 
 $(function() {
-  $('#micropost_content').countDown('#count_down');
+  $('#micropost_content').countDown({
+    target: '#count_down'
+  });
 });
