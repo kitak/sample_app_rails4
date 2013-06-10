@@ -19,11 +19,13 @@ describe "StaticPages" do
 
     describe "for signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+      let(:another_user) { FactoryGirl.create(:user) }
 
       describe "the user's feed'" do
         before do 
           FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
           FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+          @micropost = FactoryGirl.create(:micropost, user: another_user, content: "Open sesame!")
           sign_in user
           visit root_path
         end
@@ -33,6 +35,8 @@ describe "StaticPages" do
             expect(page).to have_selector("li##{item.id}", text: item.content) 
           end
         end
+        
+        it { should_not have_link("delete", href: micropost_path(@micropost)) }
       end
 
       describe "the sidebar micropost counts" do
