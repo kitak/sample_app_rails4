@@ -71,10 +71,19 @@ describe "UserPages" do
 
       it { should have_selector('div.pagination') }
 
-      it "should list each micropost" do
+      it "should list each micropost at page 1" do
         user.microposts.paginate(page: 1).each do |micropost|
           expect(page).to have_selector('li', text: micropost.content)
         end
+      end
+
+      it "should list one micropost at page 2" do
+        called_count = 0
+        user.microposts.paginate(page: 2).each do |micropost|
+          called_count += 1
+          expect(page).to have_selector('li', text: micropost.content)
+        end
+        expect(called_count).to eq 1
       end
     end
   end
