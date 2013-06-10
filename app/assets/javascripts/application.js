@@ -15,3 +15,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $('#micropost_content').countDown({
+    target: '#count_down'
+  });
+});
