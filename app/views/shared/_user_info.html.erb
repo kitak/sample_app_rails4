@@ -1,6 +1,4 @@
-<a href="<%= user_path(user) %>">
-  <%= gravatar_for user %>
-</a>
+<%= link_to gravatar_for(user), user %>
 <h1>
   <%= user.name %>
 </h1>
