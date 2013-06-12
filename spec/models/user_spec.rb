@@ -201,6 +201,13 @@ describe User do
       expect(followed_users).not_to be_empty
       expect(Relationship.where(follower_id: @user.id, followed_id: other_user.id)).to be_empty
     end
+
+    it "should destroy associated reverse_relationships" do
+      followers = other_user.followers.to_a
+      other_user.destroy
+      expect(followers).not_to be_empty
+      expect(Relationship.where(follower_id: @user.id, followed_id: other_user.id)).to be_empty
+    end
   end
 
 end
