@@ -199,9 +199,7 @@ describe User do
       followed_users = @user.followed_users.to_a
       @user.destroy
       expect(followed_users).not_to be_empty
-      followed_users.each do |followed_user|
-        expect(Relationship.where(follower_id: @user.id, followed_id: followed_user.id)).to be_empty
-      end
+      expect(Relationship.where(follower_id: @user.id, followed_id: other_user.id)).to be_empty
     end
   end
 
