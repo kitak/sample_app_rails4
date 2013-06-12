@@ -6,7 +6,7 @@
 </h1>
 <% unless current_page? user_path(user) %>
   <span><%= link_to("view my profile", user) %></span>
+  <span>
+    <%= pluralize(user.microposts.count, "micropost") %>
+  </span>
 <% end %>
-<span>
-  <%= pluralize(user.microposts.count, "micropost") %>
-</span>
