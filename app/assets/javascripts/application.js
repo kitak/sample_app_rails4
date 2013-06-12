@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
+$(document).on('ready page:change', function () {
   $('#micropost_content').countDown({
     target: '#count_down'
   });
