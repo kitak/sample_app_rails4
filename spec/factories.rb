@@ -14,4 +14,9 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
+
+  factory :message do
+    content "Don't tell anyone."
+    user
+  end
 end
