@@ -1,0 +1,10 @@
+<li id="<%= message.id %>">
+  <%= link_to gravatar_for(message.user, size: 50), message.user %>
+  <span class="user">
+    <%= link_to message.user.name, message.user %>
+  </span>
+  <span class="content"><%= wrap(message.content) %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(message.created_at) %> ago.
+  </span>
+</li>

@@ -64,6 +64,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def messages
+    @user = User.find(params[:id])
+    @messages = @user.received_messages.paginate(page: params[:page])
+    render 'message'
+  end
+
   private
 
   def user_params
