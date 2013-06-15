@@ -67,6 +67,7 @@ class UsersController < ApplicationController
   def messages
     @user = User.find(params[:id])
     @messages = @user.received_messages.paginate(page: params[:page])
+    @micropost = current_user.microposts.build
     render 'message'
   end
 
