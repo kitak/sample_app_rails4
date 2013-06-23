@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0.rc2'
 gem 'bootstrap-sass', '2.3.1.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
@@ -28,7 +28,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.14.1'
+  gem 'mysql2'
 end
 
 # Use SCSS for stylesheets
@@ -61,7 +61,8 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'therubyracer', :require => 'v8'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
