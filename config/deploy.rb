@@ -1,8 +1,5 @@
 require 'bundler/capistrano'
-require 'capistrano-rbenv'
 load 'deploy/assets'
-
-set :rbenv_ruby_version, '2.0.0-p195'
 
 set :default_environment, {
   'RBENV_ROOT' => "/usr/local/rbenv",
