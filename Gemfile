@@ -66,6 +66,7 @@ gem 'therubyracer', :require => 'v8'
 
 # Use Capistrano for deployment
 gem 'capistrano', group: :development
+gem 'capistrano-rbenv'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
