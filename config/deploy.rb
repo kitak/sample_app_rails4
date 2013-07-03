@@ -1,5 +1,13 @@
 require 'bundler/capistrano'
+require 'capistrano-rbenv'
 load 'deploy/assets'
+
+set :rbenv_ruby_version, '2.0.0-p195'
+
+set :default_environment, {
+  'RBENV_ROOT' => "/usr/local/rbenv",
+  'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"
+}
 
 set :application, "sample_app"
 set :repository,  "https://github.com/kitak/sample_app_rails4.git"
