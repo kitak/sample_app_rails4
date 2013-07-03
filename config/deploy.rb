@@ -35,10 +35,7 @@ def process_exists?(pid_file)
   capture("ps -p `cat #{pid_file}`; true").strip.split("\n").size == 2
 end
 
-after "deploy:setup" do
-  run <<-CMD
-    mkdir -p "#{shared_path}/run"
-  CMD
+after "deploy" do
   run "bundle exec rake db:populate RAILS_ENV=production"
   start
 end
