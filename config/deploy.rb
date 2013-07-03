@@ -15,3 +15,5 @@ role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations 
 #role :db,  "app001.kitak.pb" # Slave
 
 set :user, 'app'
+set :user_group, 'app'
+
