@@ -1,3 +1,6 @@
+require 'bundler/capistrano'
+load 'deploy/assets'
+
 set :application, "sample_app"
 set :repository,  "https://github.com/kitak/sample_app_rails4.git"
 set :scm, :git
