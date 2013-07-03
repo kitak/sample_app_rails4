@@ -1,6 +1,6 @@
 worker_processes 4
 
-working_directory "/var/www/rails/sample_app"
+working_directory "/var/www/rails/sample_app/current"
 
 listen "/var/www/rails/sample_app/run/unicorn.sock", :backlog => 64
 pid "/var/www/rails/sample_app/pids/unicorn.pid"
