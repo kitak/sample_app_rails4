@@ -27,9 +27,11 @@ set :user_group, 'app'
 set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 
-after "deploy" do
-  run "cd #{current_path}; bundle exec rake db:populate RAILS_ENV=production"
-  start
+namespace :db do
+  desc 'ダミーデータの生成' 
+  task :populate , roles: :app, execept: {no_release: true} do
+    run "cd #{current_path}; bundle exec rake db:populate RAILS_ENV=production"
+  end
 end
 
 namespace :deploy do
