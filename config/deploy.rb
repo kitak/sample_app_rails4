@@ -17,3 +17,9 @@ role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations 
 set :user, 'app'
 set :user_group, 'app'
 
+after "deploy:setup" do
+  run <<-CMD
+    mkdir -p "#{shared_path}/run"
+  CMD
+end
+
