@@ -16,9 +16,9 @@ set :use_sudo, false
 
 set :shared_children, %w(system log pids run)
 
-role :web, "app001.kitak.pb"
-role :app, "app001.kitak.pb"
-role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations will run
+role :web, "app003.kitak.pb"
+role :app, "app003.kitak.pb"
+role :db,  "app003.kitak.pb", :primary => true # This is where Rails migrations will run
 #role :db,  "app001.kitak.pb" # Slave
 
 set :user, 'app'
@@ -51,12 +51,6 @@ namespace :deploy do
   task :reload, :roles => :app, :except => {:no_release => true} do
     logger.important 'Reloading Unicorn...', 'Unicorn'
     run "sudo /etc/init.d/unicorn reload"
-  end
-
-  desc 'Restart Unicorn'
-  task :restart, :roles => :app, :except => {:no_release => true} do
-    logger.important 'Restarting Unicorn...', 'Unicorn'
-    run "sudo /etc/init.d/unicorn restart"
   end
 end
 
