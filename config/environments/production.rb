@@ -56,7 +56,7 @@ SampleApp::Application.configure do
 
   # fork後にconnectionをいったん切ってはりなおす
   after_fork do |server, worker|
-    if defined?(ActiveSupport::Cache::DalliStore) && Rails.cache.is_a?(ActiveSupport::Cache::DalliStore)
+    if defined?(ActiveSupport::Cache::DalliStore) && Rails.cache.kind_of?(ActiveSupport::Cache::DalliStore)
       Rails.cache.reset
 
       ObjectSpace.each_object(ActionDispatch::Session::DalliStore) { |obj| obj.reset }
