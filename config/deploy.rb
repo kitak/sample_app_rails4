@@ -58,5 +58,10 @@ namespace :deploy do
     logger.important 'Reloading Unicorn...', 'Unicorn'
     run "sudo /etc/init.d/unicorn reload"
   end
+
+  desc "Clear cache"
+  task :clear_cache do
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake cache:clear"
+  end
 end
 
