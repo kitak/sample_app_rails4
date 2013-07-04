@@ -52,7 +52,7 @@ SampleApp::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, 'localhost'
+  config.cache_store = :dalli_store
   config.session_store :dalli_store
   config.session_options = {:cookie_only => false}
 
