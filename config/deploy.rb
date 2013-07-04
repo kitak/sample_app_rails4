@@ -52,5 +52,11 @@ namespace :deploy do
     logger.important 'Reloading Unicorn...', 'Unicorn'
     run "sudo /etc/init.d/unicorn reload"
   end
+
+  desc 'Upgrade Unicorn'
+  task :upgrade, :roles => :app, :except => {:no_release => true} do
+    logger.important 'Reloading Unicorn...', 'Unicorn'
+    run "sudo /etc/init.d/unicorn reload"
+  end
 end
 
