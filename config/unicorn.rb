@@ -25,10 +25,22 @@ end
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
+end
 
+after_fork do |server, worker|
+  #
+  # Added the following code for Dalli
+  #
   if defined?(ActiveSupport::Cache::DalliStore) && Rails.cache.is_a?(ActiveSupport::Cache::DalliStore)
+    # Reset Rails's object cache
+    # Only works with DalliStore
     Rails.cache.reset
 
+    # Reset Rails's session store
+    # If you know a cleaner way to find the session store instance, please let me know
     ObjectSpace.each_object(ActionDispatch::Session::DalliStore) { |obj| obj.reset }
-  end
+  end 
+  #
+  # End of modifications for Dalli
+  #
 end
