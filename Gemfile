@@ -29,7 +29,6 @@ end
 
 group :production do
   gem 'mysql2'
-  gem 'dalli'
 end
 
 # Use SCSS for stylesheets
@@ -70,3 +69,4 @@ gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'dalli'
