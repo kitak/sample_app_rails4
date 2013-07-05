@@ -16,10 +16,10 @@ set :use_sudo, false
 
 set :shared_children, %w(system log pids run)
 
-role :web, "app003.kitak.pb"
-role :app, "app003.kitak.pb"
-role :db,  "app003.kitak.pb", :primary => true # This is where Rails migrations will run
-#role :db,  "app001.kitak.pb" # Slave
+role :web, "app001.kitak.pb" #, "app002.kitak.pb"
+role :app, "app001.kitak.pb"
+role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations will run
+#role :db,  "app001.kitak.pb"
 
 set :user, 'app'
 set :user_group, 'app'
@@ -65,3 +65,21 @@ namespace :deploy do
   end
 end
 
+namespace :puppet do
+  namespace :apply do
+    task :app do
+      apply_manifest("app")
+      deploy.upgrade
+    end
+
+    task :db do
+      apply_manifest("db")
+      deploy.upgrade
+    end
+  end
+end
+
+def apply_manifest(puppet_role)
+  manifest_path = "/home/app/sample_app"
+  run "sudo puppet apply --modulepath=#{manifest_path}/modules:#{manifest_path}/roles #{manifest_path}/manifests/#{puppet_role}.pp"
+end
