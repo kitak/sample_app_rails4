@@ -55,8 +55,8 @@ namespace :deploy do
 
   desc 'Upgrade Unicorn'
   task :upgrade, :roles => :app, :except => {:no_release => true} do
-    logger.important 'Reloading Unicorn...', 'Unicorn'
-    run "sudo /etc/init.d/unicorn reload"
+    logger.important 'Upgrading Unicorn...', 'Unicorn'
+    run "sudo /etc/init.d/unicorn upgrade"
   end
 
   desc "Clear cache"
@@ -80,6 +80,6 @@ namespace :puppet do
 end
 
 def apply_manifest(puppet_role)
-  manifest_path = "/home/app/sample_app"
+  manifest_path = "/home/app/sample_app_puppet"
   run "sudo puppet apply --modulepath=#{manifest_path}/modules:#{manifest_path}/roles #{manifest_path}/manifests/#{puppet_role}.pp"
 end
