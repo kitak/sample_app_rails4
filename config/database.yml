@@ -23,7 +23,7 @@ production:
   database: sample_app_production
   username: app
   password: AV8jsDIml
-  host: db001.kitak.pb 
+  host: db001.kitak.pblan
   encoding: utf8
 
 cucumber:
