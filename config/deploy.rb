@@ -16,9 +16,9 @@ set :use_sudo, false
 
 set :shared_children, %w(system log pids run)
 
-role :web, "app002.kitak.pb" #, "app002.kitak.pb"
-role :app, "app002.kitak.pb"
-role :db,  "app002.kitak.pb", :primary => true # This is where Rails migrations will run
+role :web, "app001.kitak.pb" #, "app002.kitak.pb"
+role :app, "app001.kitak.pb"
+role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations will run
 #role :db,  "app001.kitak.pb"
 
 set :user, 'app'

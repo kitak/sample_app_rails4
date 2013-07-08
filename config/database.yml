@@ -23,7 +23,7 @@ production:
   database: sample_app_production
   username: app
   password: AV8jsDIml
-  host: localhost
+  host: 192.168.48.101
   encoding: utf8
 
 cucumber:
