@@ -54,5 +54,6 @@ end
 
 def apply_manifest(puppet_role)
   manifest_path = "/home/kitak/sample_app_puppet"
+  run "cd #{manifest_path}; git pull origin master"
   run "sudo puppet apply --modulepath=#{manifest_path}/modules:#{manifest_path}/roles #{manifest_path}/manifests/#{puppet_role}.pp"
 end
