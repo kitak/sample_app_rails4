@@ -56,9 +56,3 @@ def apply_manifest(puppet_role)
   manifest_path = "/home/kitak/sample_app_puppet"
   run "sudo puppet apply --modulepath=#{manifest_path}/modules:#{manifest_path}/roles #{manifest_path}/manifests/#{puppet_role}.pp"
 end
-
-namespace :test do
-  task :ls do
-    run "ls -la ~" 
-  end
-end
