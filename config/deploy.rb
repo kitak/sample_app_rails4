@@ -1,31 +1,6 @@
 require 'bundler/capistrano'
+require 'capistrano/ext/multistage'
 load 'deploy/assets'
-
-set :default_environment, {
-  'RBENV_ROOT' => "/usr/local/rbenv",
-  'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"
-}
-
-set :application, "sample_app"
-set :repository,  "https://github.com/kitak/sample_app_rails4.git"
-set :scm, :git
-set :branch, "master"
-set :deploy_to, "/var/www/rails/sample_app"
-set :rails_env, "production"
-set :use_sudo, false 
-
-set :shared_children, %w(system log pids run)
-
-role :web, "app001.kitak.pb" #, "app002.kitak.pb"
-role :app, "app001.kitak.pb"
-role :db,  "app001.kitak.pb", :primary => true # This is where Rails migrations will run
-#role :db,  "app001.kitak.pb"
-
-set :user, 'app'
-set :user_group, 'app'
-
-set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
 
 namespace :db do
   desc 'ダミーデータの生成' 
@@ -80,4 +55,10 @@ end
 def apply_manifest(puppet_role)
   manifest_path = "/home/kitak/sample_app_puppet"
   run "sudo puppet apply --modulepath=#{manifest_path}/modules:#{manifest_path}/roles #{manifest_path}/manifests/#{puppet_role}.pp"
+end
+
+namespace :test do
+  task :ls do
+    run "ls -la ~" 
+  end
 end

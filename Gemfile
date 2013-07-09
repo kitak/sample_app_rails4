@@ -66,7 +66,10 @@ gem 'unicorn'
 gem 'therubyracer', :require => 'v8'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-ext'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
