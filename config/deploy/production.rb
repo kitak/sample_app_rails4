@@ -18,6 +18,3 @@ role :app, "app001.kitak.pb", "app002.kitak.pb"
 role :db,  "app001.kitak.pb", "app002.kitak.pb", :primary => true # This is where Rails migrations will run
 set :user, 'app'
 set :user_group, 'app'
-
-set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
