@@ -26,8 +26,13 @@ end
 
 namespace :db do
   desc 'ダミーデータの生成' 
-  task :populate , roles: :app, execept: {no_release: true} do
+  task :populate , roles: :db, execept: {no_release: true} do
     run "cd #{current_path}; bundle exec rake db:populate RAILS_ENV=production"
+  end
+
+  desc 'リセット。注意！' 
+  task :reset , roles: :db, execept: {no_release: true} do
+    run "cd #{current_path}; bundle exec rake db:reset RAILS_ENV=production"
   end
 end
 
