@@ -8,10 +8,12 @@ set :default_stage, "production"
 namespace :puppet do
   namespace :apply do
     task :app do
+      run "cd ~kitak/sample_app_puppet; sudo git pull origin master"
       apply_manifest("app")
     end
 
     task :db do
+      run "cd ~kitak/sample_app_puppet; sudo git pull origin master"
       apply_manifest("db")
     end
   end
