@@ -16,6 +16,11 @@ namespace :puppet do
       run "cd ~kitak/sample_app_puppet; sudo git pull origin master"
       apply_manifest("db")
     end
+
+    task :proxy do
+      run "cd ~kitak/sample_app_puppet; sudo git pull origin master"
+      apply_manifest("proxy")
+    end
   end
 end
 
@@ -62,7 +67,7 @@ namespace :deploy do
   end
 
   desc "Clear cache"
-  task :clear_cache do
+  task :clear_cache, :roles => :app, :except => {:no_release => true} do
     run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake cache:clear"
   end
 end
