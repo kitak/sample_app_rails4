@@ -13,7 +13,7 @@ namespace :puppet do
     end
 
     task :db do
-      run "cd ~kitak/sample_app_puppet; sudo git pull origin master"
+      run "cd ~kitak/sample_app_puppet; git pull origin master"
       apply_manifest("db")
     end
 
