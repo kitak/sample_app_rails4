@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 load 'deploy/assets'
 
-set :stages, ["production", "database"]
+set :stages, ["production", "database", "asset"]
 set :default_stage, "production"
 
 namespace :puppet do
